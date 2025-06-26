@@ -1,0 +1,4 @@
+.idea
+tests/files
+composer.lock
+vendor

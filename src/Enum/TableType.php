@@ -27,6 +27,8 @@ final class TableType
     const DBASE_III_PLUS_MEMO = 0x83;
     /** @var int dBase IV/dBase 5, with memo (*.DBT) */
     const DBASE_IV_MEMO = 0x8B;
+    /** @var int dBase 5, with memo (*.FPT) */
+    const DBASE_V_MEMO = 0xF5;
     /** @var int dBase 7, with memo (*.DBT) */
     const DBASE_7_MEMO = 0x8C;
     /** @var int dBase IV/dBase 5, SQL table files, with memo (*.DBT) */
@@ -67,6 +69,7 @@ final class TableType
         return in_array($version, [
             self::DBASE_III_PLUS_MEMO,
             self::DBASE_IV_MEMO,
+            self::DBASE_V_MEMO,
             self::DBASE_IV_SQL_TABLE_MEMO,
             self::DBASE_IV_SQL_SYSTEM_MEMO,
             self::DBASE_7_MEMO,
@@ -102,6 +105,7 @@ final class TableType
             self::DBASE_IV_SQL_SYSTEM_NOMEMO,
             self::DBASE_III_PLUS_MEMO,
             self::DBASE_IV_MEMO,
+            self::DBASE_V_MEMO,
             self::DBASE_7_MEMO,
             self::DBASE_IV_SQL_TABLE_MEMO,
             self::SMT,

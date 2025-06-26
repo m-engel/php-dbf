@@ -6,6 +6,7 @@ use TotalCRM\DBase\DataConverter\Encoder\EncoderInterface;
 use TotalCRM\DBase\DataConverter\Field\DBase\CharConverter;
 use TotalCRM\DBase\DataConverter\Field\DBase\DateConverter;
 use TotalCRM\DBase\DataConverter\Field\DBase\IgnoreConverter;
+use TotalCRM\DBase\DataConverter\Field\DBase\IntegerConverter;
 use TotalCRM\DBase\DataConverter\Field\DBase\LogicalConverter;
 use TotalCRM\DBase\DataConverter\Field\DBase\MemoConverter;
 use TotalCRM\DBase\DataConverter\Field\DBase\NumberConverter;
@@ -42,6 +43,7 @@ class DBaseDataConverter implements RecordDataConverterInterface
             MemoConverter::class,
             NumberConverter::class,
             CharConverter::class,
+            IntegerConverter::class
         ];
     }
 
@@ -88,7 +90,7 @@ class DBaseDataConverter implements RecordDataConverterInterface
                 return new $class($this->table, $column, $this->encoder);
             }
         }
-
+        
         throw new InvalidColumnException(sprintf('Cannot find Field for `%s` data type', $column->type));
     }
 

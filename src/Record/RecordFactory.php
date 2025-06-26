@@ -38,6 +38,8 @@ class RecordFactory
         switch ($version) {
 //            case TableType::DBASE_IV_MEMO:
 //                return DBase4Record::class;
+            case TableType::DBASE_V_MEMO:
+                return DBase5Record::class;
 
             case TableType::DBASE_7_NOMEMO:
             case TableType::DBASE_7_MEMO:
