@@ -1,5 +1,5 @@
 {
-    "name": "totalcrm/php-dbf",
+    "name": "m-engel/php-dbf",
     "type": "library",
     "description": "A simple parser for *.dbf files using PHP",
     "keywords": ["dbase", "dbf", "php"],
@@ -9,6 +9,10 @@
         {
             "name": "Alexander Romanenko",
             "email": "romanenko.a@bk.ru"
+        },
+        {
+            "name": "Michael Engel",
+            "email": "git@mailfetch.de"
         }
     ],
     "require": {
