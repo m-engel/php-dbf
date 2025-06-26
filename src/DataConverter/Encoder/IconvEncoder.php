@@ -10,6 +10,10 @@ class IconvEncoder implements EncoderInterface
 {
     public function encode(string $string, string $fromEncoding, string $toEncoding): string
     {
-        return iconv($fromEncoding, $toEncoding, $string);
+        try {
+            return iconv($fromEncoding, $toEncoding, $string)??'';
+        } catch (\TypeError $e) {
+            return $string;
+        }
     }
 }
