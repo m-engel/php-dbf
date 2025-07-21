@@ -17,17 +17,36 @@ class MemoFactory
         }
 
         $memoExt = $refClass->getMethod('getExtension')->invoke(null);
-        $fileInfo = pathinfo($table->filepath);
-        $memoExt = 'DBF' === $fileInfo['extension'] ? strtoupper($memoExt) : $memoExt;
         if ('.' !== substr($memoExt, 0, 1)) {
             $memoExt = '.'.$memoExt;
         }
-        $memoFilepath = $fileInfo['dirname'].DIRECTORY_SEPARATOR.$fileInfo['filename'].$memoExt;
-        if (!file_exists($memoFilepath)) {
-            return null; //todo create file?
+
+        $fileInfo = pathinfo($table->filepath);
+        $expectedBase = $fileInfo['filename'];
+        $expectedExt = ltrim($memoExt, '.');
+        $dir = $fileInfo['dirname'];
+        $foundMemoFile = null;
+
+        foreach (scandir($dir) as $file) {
+            if (!is_file($dir . DIRECTORY_SEPARATOR . $file)) {
+                continue;
+            }
+
+            $info = pathinfo($file);
+            if (
+                isset($info['filename'], $info['extension']) &&
+                strcasecmp($info['filename'], $expectedBase) === 0 &&
+                strcasecmp($info['extension'], $expectedExt) === 0
+            ) {
+                $foundMemoFile = $dir . DIRECTORY_SEPARATOR . $file;
+                break;
+            }
         }
 
-        return $refClass->newInstance($table, $memoFilepath, $encoder);
+        if (!$foundMemoFile) {
+            return null;
+        }
+        return $refClass->newInstance($table, $foundMemoFile, $encoder);
     }
 
     private static function getClass(int $version): string
